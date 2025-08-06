@@ -13,8 +13,8 @@ function App() {
           Please enter the verification code sent to your email id
           mail@gmail.com
         </div>
-        <OtpInput />
-        <Submit />
+        <OtpInput length={6}/>
+       
       </div>
     </>
   );

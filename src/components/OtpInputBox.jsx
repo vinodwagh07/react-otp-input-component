@@ -1,9 +1,10 @@
 import React from "react";
 
-const OtpInputBox = ({ index, inputRefs }) => {
+const OtpInputBox = ({ index,length, inputRefs,value,onChangeValue }) => {
   const handleChange = (e) => {
-    const value = e.target.value;
-    if (value && index < inputRefs.current.length - 1) {
+    const value = e.target.value.replace(/[^0-9]/g, "");
+    onChangeValue(value,index)
+    if (value && index < length - 1) {
       inputRefs.current[index + 1]?.focus();
     }
   };
@@ -24,13 +25,16 @@ const OtpInputBox = ({ index, inputRefs }) => {
   return (
     <div>
       <input
-        aria-label={`Digit ${index + 1} of 6`}
         type="text"
+        value={value}
         inputMode="numeric"
         maxLength="1"
         autoFocus={index === 0}
         ref={(el) => (inputRefs.current[index] = el)}
-        className="font-inter rounded-2xl bg-blue-500 w-[50px] h-[60px] text-white font-bold text-center outline-none text-2xl"
+        //className="font-inter rounded-2xl bg-blue-500 w-[50px] h-[60px] text-white font-bold text-center outline-none text-2xl"
+        className="font-inter rounded-2xl bg-blue-500 w-[50px] h-[60px] 
+           text-white font-bold text-center outline-none text-2xl
+           focus:ring-2 focus:ring-cyan-300"
         onKeyDown={handleKeyDown}
         onChange={handleChange}
       />
